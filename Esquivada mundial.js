@@ -18,7 +18,6 @@ let ultimoFrame = 0;
 const jugador = document.getElementById("jugador");
 jugador.style.backgroundImage = `url(${imgParado})`;
 
-
 // -----------------------------------------
 // MOVIMIENTO DEL JUGADOR
 // -----------------------------------------
@@ -27,24 +26,22 @@ document.addEventListener("keydown", (e) => {
     const speed = 20;
     caminando = true;
 
-    switch (e.key) {
-        case "ArrowLeft":
+    switch (e.key.toLowerCase()) {
+        case "arrowleft":
         case "a":
-        case "A":
             posX -= speed;
             break;
 
-        case "ArrowRight":
+        case "arrowright":
         case "d":
-        case "D":
             posX += speed;
             break;
 
-        case "ArrowUp":
+        case "arrowup":
             posY -= speed;
             break;
 
-        case "ArrowDown":
+        case "arrowdown":
             posY += speed;
             break;
     }
@@ -62,7 +59,6 @@ function actualizarPosicion() {
     jugador.style.top = `${posY}px`;
 }
 
-
 // -----------------------------------------
 // ANIMACIÓN DEL SOLDADO
 // -----------------------------------------
@@ -70,7 +66,7 @@ function actualizarPosicion() {
 function animarJugador(time) {
     if (caminando) {
         if (time - ultimoFrame > 120) {
-            frame = (frame + 1) % 2;
+            frame = (frame + 1) % imgCaminar.length;
             jugador.style.backgroundImage = `url(${imgCaminar[frame]})`;
             ultimoFrame = time;
         }
@@ -78,7 +74,6 @@ function animarJugador(time) {
     requestAnimationFrame(animarJugador);
 }
 requestAnimationFrame(animarJugador);
-
 
 // -----------------------------------------
 // SISTEMA DE METEORITOS
@@ -89,7 +84,6 @@ function crearMeteorito() {
     meteorito.classList.add("meteorito");
     meteorito.style.backgroundImage = `url(${imgMeteorito})`;
 
-    // Posición inicial aleatoria
     const xRandom = Math.random() * (window.innerWidth - 60);
     meteorito.style.left = `${xRandom}px`;
     meteorito.style.top = `-80px`;
@@ -98,22 +92,21 @@ function crearMeteorito() {
 
     let y = -80;
 
-    function caída() {
-        y += 6; // velocidad del meteoro
+    function caida() {
+        y += 6;
         meteorito.style.top = `${y}px`;
 
         detectarColision(meteorito);
 
         if (y < window.innerHeight + 100) {
-            requestAnimationFrame(caída);
+            requestAnimationFrame(caida);
         } else {
             meteorito.remove();
         }
     }
 
-    caída();
+    caida();
 }
-
 
 // -----------------------------------------
 // COLISIONES
@@ -135,19 +128,20 @@ function detectarColision(meteorito) {
     }
 }
 
-
 // -----------------------------------------
 // GENERAR METEORITOS CADA X TIEMPO
 // -----------------------------------------
 
 setInterval(() => {
     crearMeteorito();
-}, 1200); // cada 1.2 segundos
+}, 1200);
 
 // ---------------------------------------------------------
 // FIN DEL CÓDIGO
-// ----------------------------------------------------------
+// ---------------------------------------------------------
+
 
 
 
     
+
