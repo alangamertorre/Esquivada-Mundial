@@ -48,6 +48,10 @@ document.addEventListener("keydown", (e) => {
     actualizarPosicion();
 });
 
+   if (caminando == true) {
+        jugador.style.backgroundImage = `url(${imgParado})`;
+       }
+
 document.addEventListener("keyup", () => {
     caminando = false;
     jugador.style.backgroundImage = `url(${imgParado})`;
@@ -143,6 +147,7 @@ if (!window.meteorInterval) {
 
 
     
+
 
 
 
