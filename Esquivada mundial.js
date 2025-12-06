@@ -102,7 +102,14 @@ function crearMeteorito() {
 function detectarColision(meteorito) {
     const pj = jugador.getBoundingClientRect();
     const mt = meteorito.getBoundingClientRect();
-
+    
+    const hitboxReducida = {
+        left: mt.left + 10,
+        right: mt.right - 10,
+        top: mt.top + 10,
+        bottom: mt.bottom - 10
+    };
+    
     const choque =
         pj.left < mt.right &&
         pj.right > mt.left &&
@@ -136,6 +143,7 @@ if (!window.meteorInterval) {
 
 
     
+
 
 
 
