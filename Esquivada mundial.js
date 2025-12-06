@@ -120,9 +120,12 @@ function detectarColision(meteorito) {
 // GENERAR METEORITOS CADA X TIEMPO
 // -----------------------------------------
 
-setInterval(() => {
-    crearMeteorito();
-}, 1200);
+if (!window.meteorInterval) {
+    window.meteorInterval = setInterval(() => {
+        crearMeteorito();
+    }, 1200);
+}
+
 
 // ---------------------------------------------------------
 // FIN DEL CÓDIGO
@@ -133,6 +136,7 @@ setInterval(() => {
 
 
     
+
 
 
 
