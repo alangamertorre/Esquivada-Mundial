@@ -33,7 +33,7 @@ document.addEventListener("keydown", (e) => {
         case "A":
             posX -= speed;
             // Mirar a la izquierda (invertido)
-            soldado.style.transform = "scaleX(-1)";
+            jugador.style.transform = "scaleX(-1)";
             break;
 
         case "ArrowRight":
@@ -41,12 +41,8 @@ document.addEventListener("keydown", (e) => {
         case "D":
             posX += speed;
             // Mirar a la derecha (normal)
-           soldado.style.transform = "scaleX(1)";
-
+            jugador.style.transform = "scaleX(1)";
             break;
-
-
-
     }
 
     actualizarPosicion();
@@ -61,7 +57,6 @@ function actualizarPosicion() {
     jugador.style.left = `${posX}px`;
     jugador.style.top = `${posY}px`;
 }
-
 
 
 // -----------------------------------------
@@ -83,20 +78,20 @@ function crearMeteorito() {
 
     let y = -80;
 
-    function caída() {
+    function caida() {
         y += 6; // velocidad del meteoro
         meteorito.style.top = `${y}px`;
 
         detectarColision(meteorito);
 
         if (y < window.innerHeight + 100) {
-            requestAnimationFrame(caída);
+            requestAnimationFrame(caida);
         } else {
             meteorito.remove();
         }
     }
 
-    caída();
+    caida();
 }
 
 
@@ -116,7 +111,7 @@ function detectarColision(meteorito) {
 
     if (choque) {
         alert("¡Has sido alcanzado por un meteorito! Juego terminado.");
-        window.location.reload();//hacer pantalla de muerte(por hacer)
+        window.location.reload(); // pantalla de muerte (por hacer)
     }
 }
 
@@ -126,17 +121,19 @@ function detectarColision(meteorito) {
 // -----------------------------------------
 
 setInterval(() => {
-    crearMeteorito()
-}, 1200
+    crearMeteorito();
+}, 1200);
 
 // ---------------------------------------------------------
 // FIN DEL CÓDIGO
-// ----------------------------------------------------------
+// ---------------------------------------------------------
+
 
 
 
 
     
+
 
 
 
