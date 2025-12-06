@@ -2,7 +2,7 @@
 // CONFIGURACIÓN DE IMÁGENES
 // -----------------------------------------
 const imgParado = "soldado-estable.png";
-const imgCaminar = ["soldado-caminar1.png", "soldado-caminar2.png"];
+const imgCaminar = "soldado-caminar1.png";
 const imgMeteorito = "meteorito.png";
 
 // -----------------------------------------
@@ -49,7 +49,7 @@ document.addEventListener("keydown", (e) => {
 });
 
    if (caminando == true) {
-        jugador.style.backgroundImage = `url(${imgParado})`;
+        jugador.style.backgroundImage = `url(${imgCaminar})`;
        }
 
 document.addEventListener("keyup", () => {
@@ -147,6 +147,7 @@ if (!window.meteorInterval) {
 
 
     
+
 
 
 
