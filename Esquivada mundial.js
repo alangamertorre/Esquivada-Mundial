@@ -63,9 +63,20 @@ document.addEventListener("keydown", (e) => {
             jugador.style.transform = "scaleX(1)";
             break;
     }
-
+   
     actualizarPosicion();
 });
+function animarCaminar(timestamp) {
+    if (!caminando) return;
+
+    if (timestamp - ultimoFrame > 80) { // velocidad más rápida
+        frame = (frame + 1) % imgCaminar.length;
+        jugador.style.backgroundImage = `url(${imgCaminar[frame]})`;
+        ultimoFrame = timestamp;
+    }
+
+    requestAnimationFrame(animarCaminar);
+}
 
 
 document.addEventListener("keyup", () => {
@@ -170,6 +181,7 @@ if (!window.meteorInterval) {
 
 
     
+
 
 
 
