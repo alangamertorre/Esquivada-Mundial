@@ -2,7 +2,7 @@
 // CONFIGURACIÓN DE IMÁGENES
 // -----------------------------------------
 const imgParado = "soldado-estable.png";
-const imgCaminar = "soldado-caminar1.png";
+const imgCaminar = ["soldado-caminar1.png", "soldado-caminar2.png"];
 const imgMeteorito = "meteorito.png";
 
 // -----------------------------------------
@@ -20,19 +20,39 @@ jugador.style.backgroundImage = `url(${imgParado})`;
 
 
 // -----------------------------------------
+// ANIMACIÓN DEL JUGADOR
+// -----------------------------------------
+
+function animarCaminar(timestamp) {
+    if (!caminando) return; // si no camina → no animar
+
+    if (timestamp - ultimoFrame > 150) { // velocidad de animación
+        frame = (frame + 1) % imgCaminar.length;
+        jugador.style.backgroundImage = `url(${imgCaminar[frame]})`;
+        ultimoFrame = timestamp;
+    }
+
+    requestAnimationFrame(animarCaminar);
+}
+
+
+// -----------------------------------------
 // MOVIMIENTO DEL JUGADOR
 // -----------------------------------------
 
 document.addEventListener("keydown", (e) => {
     const speed = 20;
-    caminando = true;
+
+    if (!caminando) {
+        caminando = true;
+        requestAnimationFrame(animarCaminar);
+    }
 
     switch (e.key) {
         case "ArrowLeft":
         case "a":
         case "A":
             posX -= speed;
-            // Mirar a la izquierda (invertido)
             jugador.style.transform = "scaleX(-1)";
             break;
 
@@ -40,27 +60,25 @@ document.addEventListener("keydown", (e) => {
         case "d":
         case "D":
             posX += speed;
-            // Mirar a la derecha (normal)
             jugador.style.transform = "scaleX(1)";
             break;
     }
 
     actualizarPosicion();
 });
-document.addEventListener("keyup", () => {
-    caminando = true;
-    jugador.style.backgroundImage = `url(${imgCaminar})`;
-});
+
 
 document.addEventListener("keyup", () => {
     caminando = false;
     jugador.style.backgroundImage = `url(${imgParado})`;
 });
 
+
 function actualizarPosicion() {
     jugador.style.left = `${posX}px`;
     jugador.style.top = `${posY}px`;
 }
+
 
 
 // -----------------------------------------
@@ -69,11 +87,11 @@ function actualizarPosicion() {
 
 function crearMeteorito() {
     const meteorito = document.createElement("div");
-    meteorito.style.rotate = `33deg`;
     meteorito.classList.add("meteorito");
     meteorito.style.backgroundImage = `url(${imgMeteorito})`;
+    meteorito.style.rotate = `33deg`;
 
-    // Posición inicial aleatoria
+    // Posición aleatoria
     const xRandom = Math.random() * (window.innerWidth - 60);
     meteorito.style.left = `${xRandom}px`;
     meteorito.style.top = `-80px`;
@@ -83,7 +101,7 @@ function crearMeteorito() {
     let y = -80;
 
     function caida() {
-        y += 6; // velocidad del meteoro
+        y += 6;
         meteorito.style.top = `${y}px`;
 
         detectarColision(meteorito);
@@ -99,6 +117,7 @@ function crearMeteorito() {
 }
 
 
+
 // -----------------------------------------
 // COLISIONES
 // -----------------------------------------
@@ -106,25 +125,28 @@ function crearMeteorito() {
 function detectarColision(meteorito) {
     const pj = jugador.getBoundingClientRect();
     const mt = meteorito.getBoundingClientRect();
-    
-    const hitboxReducida = {
-        left: mt.left + 10,
-        right: mt.right - 10,
-        top: mt.top + 10,
-        bottom: mt.bottom - 10
+
+    // HITBOX REDUCIDA DEL METEORITO
+    const reduccion = 20;
+    const mtHitbox = {
+        left: mt.left + reduccion,
+        right: mt.right - reduccion,
+        top: mt.top + reduccion,
+        bottom: mt.bottom - reduccion
     };
-    
+
     const choque =
-        pj.left < mt.right &&
-        pj.right > mt.left &&
-        pj.top < mt.bottom &&
-        pj.bottom > mt.top;
+        pj.left < mtHitbox.right &&
+        pj.right > mtHitbox.left &&
+        pj.top < mtHitbox.bottom &&
+        pj.bottom > mtHitbox.top;
 
     if (choque) {
         alert("¡Has sido alcanzado por un meteorito! Juego terminado.");
-        window.location.reload(); // pantalla de muerte (por hacer)
+        window.location.reload();
     }
 }
+
 
 
 // -----------------------------------------
@@ -146,7 +168,9 @@ if (!window.meteorInterval) {
 
 
 
+
     
+
 
 
 
