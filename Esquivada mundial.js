@@ -126,8 +126,8 @@ function detectarColision(meteorito) {
 // -----------------------------------------
 
 setInterval(() => {
-    crearMeteorito();
-}, Math.random() * (1200 - 2000)); // cada 1.2 segundos
+    crearMeteorito()
+}, 1200
 
 // ---------------------------------------------------------
 // FIN DEL CÓDIGO
@@ -137,5 +137,6 @@ setInterval(() => {
 
 
     
+
 
 
