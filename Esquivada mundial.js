@@ -13,8 +13,12 @@ let posY = window.innerHeight * 0.63;
 let caminando = false;
 let frame = 0;
 let ultimoFrame = 0;
+let teclas = {
+    izquierda: false,
+    derecha: false
+};
 
-// Elementos del DOM
+// Elemento jugador
 const jugador = document.getElementById("jugador");
 jugador.style.backgroundImage = `url(${imgParado})`;
 
@@ -22,11 +26,10 @@ jugador.style.backgroundImage = `url(${imgParado})`;
 // -----------------------------------------
 // ANIMACIÓN DEL JUGADOR
 // -----------------------------------------
-
 function animarCaminar(timestamp) {
-    if (!caminando) return; // si no camina → no animar
+    if (!caminando) return;
 
-    if (timestamp - ultimoFrame > 150) { // velocidad de animación
+    if (timestamp - ultimoFrame > 120) {
         frame = (frame + 1) % imgCaminar.length;
         jugador.style.backgroundImage = `url(${imgCaminar[frame]})`;
         ultimoFrame = timestamp;
@@ -37,54 +40,57 @@ function animarCaminar(timestamp) {
 
 
 // -----------------------------------------
-// MOVIMIENTO DEL JUGADOR
+// MOVIMIENTO CONTINUO
 // -----------------------------------------
+function moverJugador() {
+    const speed = 7;
 
+    if (teclas.izquierda) {
+        posX -= speed;
+        jugador.style.transform = "scaleX(-1)";
+    }
+    else if (teclas.derecha) {
+        posX += speed;
+        jugador.style.transform = "scaleX(1)";
+    }
+
+    actualizarPosicion();
+    requestAnimationFrame(moverJugador);
+}
+
+requestAnimationFrame(moverJugador);
+
+
+// -----------------------------------------
+// INPUT DEL TECLADO
+// -----------------------------------------
 document.addEventListener("keydown", (e) => {
-    const speed = 20;
+
+    if (["ArrowLeft", "a", "A"].includes(e.key)) {
+        teclas.izquierda = true;
+    }
+
+    if (["ArrowRight", "d", "D"].includes(e.key)) {
+        teclas.derecha = true;
+    }
 
     if (!caminando) {
         caminando = true;
         requestAnimationFrame(animarCaminar);
     }
-
-    switch (e.key) {
-        case "ArrowLeft":
-        case "a":
-        case "A":
-            posX -= speed;
-            jugador.style.transform = "scaleX(-1)";
-            break;
-
-        case "ArrowRight":
-        case "d":
-        case "D":
-            posX += speed;
-            jugador.style.transform = "scaleX(1)";
-            break;
-    }
-   
-    actualizarPosicion();
 });
-function animarCaminar(timestamp) {
-    if (!caminando) return;
-
-    if (timestamp - ultimoFrame > 80) { // velocidad más rápida
-        frame = (frame + 1) % imgCaminar.length;
-        jugador.style.backgroundImage = `url(${imgCaminar[frame]})`;
-        ultimoFrame = timestamp;
-    }
-
-    requestAnimationFrame(animarCaminar);
-}
-
 
 document.addEventListener("keyup", () => {
+    teclas.izquierda = false;
+    teclas.derecha = false;
     caminando = false;
     jugador.style.backgroundImage = `url(${imgParado})`;
 });
 
 
+// -----------------------------------------
+// ACTUALIZAR POSICIÓN
+// -----------------------------------------
 function actualizarPosicion() {
     jugador.style.left = `${posX}px`;
     jugador.style.top = `${posY}px`;
@@ -92,95 +98,11 @@ function actualizarPosicion() {
 
 
 
-// -----------------------------------------
-// SISTEMA DE METEORITOS
-// -----------------------------------------
-
-function crearMeteorito() {
-    const meteorito = document.createElement("div");
-    meteorito.classList.add("meteorito");
-    meteorito.style.backgroundImage = `url(${imgMeteorito})`;
-    meteorito.style.rotate = `33deg`;
-
-    // Posición aleatoria
-    const xRandom = Math.random() * (window.innerWidth - 60);
-    meteorito.style.left = `${xRandom}px`;
-    meteorito.style.top = `-80px`;
-
-    document.body.appendChild(meteorito);
-
-    let y = -80;
-
-    function caida() {
-        y += 6;
-        meteorito.style.top = `${y}px`;
-
-        detectarColision(meteorito);
-
-        if (y < window.innerHeight + 100) {
-            requestAnimationFrame(caida);
-        } else {
-            meteorito.remove();
-        }
-    }
-
-    caida();
-}
-
-
-
-// -----------------------------------------
-// COLISIONES
-// -----------------------------------------
-
-function detectarColision(meteorito) {
-    const pj = jugador.getBoundingClientRect();
-    const mt = meteorito.getBoundingClientRect();
-
-    // HITBOX REDUCIDA DEL METEORITO
-    const reduccion = 20;
-    const mtHitbox = {
-        left: mt.left + reduccion,
-        right: mt.right - reduccion,
-        top: mt.top + reduccion,
-        bottom: mt.bottom - reduccion
-    };
-
-    const choque =
-        pj.left < mtHitbox.right &&
-        pj.right > mtHitbox.left &&
-        pj.top < mtHitbox.bottom &&
-        pj.bottom > mtHitbox.top;
-
-    if (choque) {
-        alert("¡Has sido alcanzado por un meteorito! Juego terminado.");
-        window.location.reload();
-    }
-}
-
-
-
-// -----------------------------------------
-// GENERAR METEORITOS CADA X TIEMPO
-// -----------------------------------------
-
-if (!window.meteorInterval) {
-    window.meteorInterval = setInterval(() => {
-        crearMeteorito();
-    }, 1200);
-}
-
-
-// ---------------------------------------------------------
-// FIN DEL CÓDIGO
-// ---------------------------------------------------------
-actualizarPosicion();
-
-
 
 
 
     
+
 
 
 
