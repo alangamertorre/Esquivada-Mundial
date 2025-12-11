@@ -99,9 +99,96 @@ function actualizarPosicion() {
 
 
 
+// -----------------------------------------
+// SISTEMA DE METEORITOS
+// -----------------------------------------
+
+function crearMeteorito() {
+    const meteorito = document.createElement("div");
+    meteorito.classList.add("meteorito");
+    meteorito.style.backgroundImage = `url(${imgMeteorito})`;
+    meteorito.style.rotate = `33deg`;
+
+    // Posición aleatoria
+    const xRandom = Math.random() * (window.innerWidth - 60);
+    meteorito.style.left = `${xRandom}px`;
+    meteorito.style.top = `-80px`;
+
+    document.body.appendChild(meteorito);
+
+    let y = -80;
+
+    function caida() {
+        y += 6;
+        meteorito.style.top = `${y}px`;
+
+        detectarColision(meteorito);
+
+        if (y < window.innerHeight + 100) {
+            requestAnimationFrame(caida);
+        } else {
+            meteorito.remove();
+        }
+    }
+
+    caida();
+}
+
+
+
+// -----------------------------------------
+// COLISIONES
+// -----------------------------------------
+
+function detectarColision(meteorito) {
+    const pj = jugador.getBoundingClientRect();
+    const mt = meteorito.getBoundingClientRect();
+
+    // HITBOX REDUCIDA DEL METEORITO
+    const reduccion = 20;
+    const mtHitbox = {
+        left: mt.left + reduccion,
+        right: mt.right - reduccion,
+        top: mt.top + reduccion,
+        bottom: mt.bottom - reduccion
+    };
+
+    const choque =
+        pj.left < mtHitbox.right &&
+        pj.right > mtHitbox.left &&
+        pj.top < mtHitbox.bottom &&
+        pj.bottom > mtHitbox.top;
+
+    if (choque) {
+        alert("¡Has sido alcanzado por un meteorito! Juego terminado.");
+        window.location.reload();
+    }
+}
+
+
+
+// -----------------------------------------
+// GENERAR METEORITOS CADA X TIEMPO
+// -----------------------------------------
+
+if (!window.meteorInterval) {
+    window.meteorInterval = setInterval(() => {
+        crearMeteorito();
+    }, 1200);
+}
+
+
+// ---------------------------------------------------------
+// FIN DEL CÓDIGO
+// ---------------------------------------------------------
+
+
+
+
 
 
     
+
 
 
 
