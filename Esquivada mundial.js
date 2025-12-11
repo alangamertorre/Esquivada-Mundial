@@ -1,6 +1,6 @@
-// -----------------------------------------
+//-----------------------------------------
 // CONFIGURACIÓN DE IMÁGENES
-// -----------------------------------------
+//-----------------------------------------
 const imgParado = "soldado-estable.png";
 const imgCaminar = ["soldado-caminar1.png", "soldado-caminar2.png"];
 const imgMeteorito = "meteorito.png";
@@ -13,12 +13,14 @@ let posY = window.innerHeight * 0.63;
 let caminando = false;
 let frame = 0;
 let ultimoFrame = 0;
+
+// teclas activas
 let teclas = {
     izquierda: false,
     derecha: false
 };
 
-// Elemento jugador
+// Elemento del jugador
 const jugador = document.getElementById("jugador");
 jugador.style.backgroundImage = `url(${imgParado})`;
 
@@ -49,7 +51,7 @@ function moverJugador() {
         posX -= speed;
         jugador.style.transform = "scaleX(-1)";
     }
-    else if (teclas.derecha) {
+    if (teclas.derecha) {
         posX += speed;
         jugador.style.transform = "scaleX(1)";
     }
@@ -58,6 +60,7 @@ function moverJugador() {
     requestAnimationFrame(moverJugador);
 }
 
+// iniciar loop de movimiento continuo
 requestAnimationFrame(moverJugador);
 
 
@@ -83,6 +86,7 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keyup", () => {
     teclas.izquierda = false;
     teclas.derecha = false;
+
     caminando = false;
     jugador.style.backgroundImage = `url(${imgParado})`;
 });
@@ -97,12 +101,9 @@ function actualizarPosicion() {
 }
 
 
-
-
 // -----------------------------------------
 // SISTEMA DE METEORITOS
 // -----------------------------------------
-
 function crearMeteorito() {
     const meteorito = document.createElement("div");
     meteorito.classList.add("meteorito");
@@ -135,17 +136,15 @@ function crearMeteorito() {
 }
 
 
-
 // -----------------------------------------
 // COLISIONES
 // -----------------------------------------
-
 function detectarColision(meteorito) {
     const pj = jugador.getBoundingClientRect();
     const mt = meteorito.getBoundingClientRect();
 
-    // HITBOX REDUCIDA DEL METEORITO
     const reduccion = 20;
+
     const mtHitbox = {
         left: mt.left + reduccion,
         right: mt.right - reduccion,
@@ -166,11 +165,9 @@ function detectarColision(meteorito) {
 }
 
 
-
 // -----------------------------------------
 // GENERAR METEORITOS CADA X TIEMPO
 // -----------------------------------------
-
 if (!window.meteorInterval) {
     window.meteorInterval = setInterval(() => {
         crearMeteorito();
@@ -187,7 +184,9 @@ if (!window.meteorInterval) {
 
 
 
+
     
+
 
 
 
