@@ -14,6 +14,13 @@ let caminando = false;
 let frame = 0;
 let ultimoFrame = 0;
 
+// Sistema de salto
+let saltando = false;
+let velocidadY = 0;
+const gravedad = 0.8;
+const fuerzaSalto = -15;
+const suelo = window.innerHeight * 0.63;
+
 // teclas activas
 let teclas = {
     izquierda: false,
@@ -56,6 +63,24 @@ function moverJugador() {
         jugador.style.transform = "scaleX(1)";
     }
 
+    // Física del salto
+    if (saltando) {
+        velocidadY += gravedad;
+        posY += velocidadY;
+
+        // Verificar si llegó al suelo
+        if (posY >= suelo) {
+            posY = suelo;
+            velocidadY = 0;
+            saltando = false;
+        }
+    }
+
+    // Limitar movimiento horizontal
+    const margen = 40;
+    if (posX < margen) posX = margen;
+    if (posX > window.innerWidth - margen) posX = window.innerWidth - margen;
+
     actualizarPosicion();
     requestAnimationFrame(moverJugador);
 }
@@ -77,18 +102,32 @@ document.addEventListener("keydown", (e) => {
         teclas.derecha = true;
     }
 
-    if (!caminando) {
+    // Salto con espacio o flecha arriba
+    if ([" ", "ArrowUp", "w", "W"].includes(e.key) && !saltando) {
+        e.preventDefault(); // Evitar scroll con espacio
+        saltando = true;
+        velocidadY = fuerzaSalto;
+    }
+
+    if (!caminando && (teclas.izquierda || teclas.derecha)) {
         caminando = true;
         requestAnimationFrame(animarCaminar);
     }
 });
 
-document.addEventListener("keyup", () => {
-    teclas.izquierda = false;
-    teclas.derecha = false;
+document.addEventListener("keyup", (e) => {
+    if (["ArrowLeft", "a", "A"].includes(e.key)) {
+        teclas.izquierda = false;
+    }
+    
+    if (["ArrowRight", "d", "D"].includes(e.key)) {
+        teclas.derecha = false;
+    }
 
-    caminando = false;
-    jugador.style.backgroundImage = `url(${imgParado})`;
+    if (!teclas.izquierda && !teclas.derecha) {
+        caminando = false;
+        jugador.style.backgroundImage = `url(${imgParado})`;
+    }
 });
 
 
@@ -108,10 +147,12 @@ function crearMeteorito() {
     const meteorito = document.createElement("div");
     meteorito.classList.add("meteorito");
     meteorito.style.backgroundImage = `url(${imgMeteorito})`;
-    meteorito.style.rotate = `33deg`;
+    meteorito.style.transform = `rotate(33deg)`;
+    meteorito.style.width = "50px";
+    meteorito.style.height = "50px";
 
     // Posición aleatoria
-    const xRandom = Math.random() * (window.innerWidth - 60);
+    const xRandom = Math.random() * (window.innerWidth - 50);
     meteorito.style.left = `${xRandom}px`;
     meteorito.style.top = `-80px`;
 
@@ -143,7 +184,7 @@ function detectarColision(meteorito) {
     const pj = jugador.getBoundingClientRect();
     const mt = meteorito.getBoundingClientRect();
 
-    const reduccion = 20;
+    const reduccion = 15;
 
     const mtHitbox = {
         left: mt.left + reduccion,
@@ -175,11 +216,6 @@ if (!window.meteorInterval) {
 }
 
 
-// ---------------------------------------------------------
-// FIN DEL CÓDIGO
-// ---------------------------------------------------------
-
-
 
 
 
@@ -187,6 +223,7 @@ if (!window.meteorInterval) {
 
 
     
+
 
 
 
