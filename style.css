@@ -1,3 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
 /* --- CIELO --- */
 #cielo {
     position: fixed;
@@ -9,7 +22,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: -1;
+    z-index: -2;
 }
 
 /* --- CAMPO DE JUEGO --- */
@@ -21,8 +34,9 @@
     height: 30vh;
     background-image: url("Camp-de-juego.png");
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    z-index: -1;
 }
 
 /* --- JUGADOR (soldado) --- */
@@ -30,21 +44,21 @@
     width: 80px;
     height: 114px;
     position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
     image-rendering: pixelated;
+    z-index: 10;
 }
 
-/* --- METEORO --- */
+/* --- METEORITO --- */
 .meteorito {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     position: fixed;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
     image-rendering: pixelated;
-    animation: caer 3s linear fo
+    z-index: 5;
 }
