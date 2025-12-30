@@ -36,6 +36,8 @@ html, body {
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
     background-size: auto 30vh;
+    background-color: transparent;
+    mix-blend-mode: multiply;
     image-rendering: pixelated;
 }
 
@@ -62,6 +64,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 5;
 }
+
 
 
 
