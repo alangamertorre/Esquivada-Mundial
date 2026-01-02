@@ -10,6 +10,7 @@ html, body {
     width: 100%;
     height: 100%;
     position: fixed;
+    background: transparent;
 }
 
 /* --- CIELO --- */
@@ -18,7 +19,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70vh;
+    height: 100%;
     background-image: url("cielo.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -36,7 +37,6 @@ html, body {
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
     background-size: auto 30vh;
-    background: transparent;
     mix-blend-mode: multiply;
     image-rendering: pixelated;
 }
@@ -64,6 +64,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 5;
 }
+
 
 
 
