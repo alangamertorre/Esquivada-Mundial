@@ -52,7 +52,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
-    z-index: 10;
+    z-index: 11;
 }
 
 /* --- METEORITO --- */
@@ -64,8 +64,9 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
-    z-index: 5;
+    z-index: 10;
 }
+
 
 
 
