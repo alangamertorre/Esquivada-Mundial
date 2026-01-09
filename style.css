@@ -4,19 +4,19 @@
     box-sizing: border-box;
 }
 
+/* Mantiene el juego visible sin bloquear elementos */
 html, body {
     overflow: hidden;
     font-family: Arial, sans-serif;
     width: 100%;
     height: 100%;
-    position: fixed;
     background: transparent;
 }
 
 /* --- CIELO --- */
 #cielo {
     position: fixed;
-    top: -1px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -25,17 +25,16 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
-    z-index: -2;
+    z-index: 0; /* Antes estaba en negativo y quedaba oculto */
 }
 
-/* SUELO */
+/* --- SUELO --- */
 #campoDeJuego {
     position: fixed;
     bottom: 0;
     left: 0;
-    top: 0;
     width: 100%;
-    height: 30vh;
+    height: 30vh; /* Ahora sí respeta la altura */
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
     background-size: auto 30vh;
@@ -67,6 +66,8 @@ html, body {
     image-rendering: pixelated;
     z-index: 5;
 }
+
+
 
 
 
