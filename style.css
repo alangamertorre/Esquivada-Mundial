@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     buttom: 0;
 }
 
@@ -66,6 +65,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
