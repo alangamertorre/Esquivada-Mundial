@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    buttom: 0;
 }
 
 /* Mantiene el juego visible sin bloquear elementos */
@@ -30,8 +31,9 @@ html, body {
 
 /* --- SUELO --- */
 #campoDeJuego {
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 30vh;              /* ALTURA FIJA */
@@ -67,6 +69,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
