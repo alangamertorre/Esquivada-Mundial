@@ -54,8 +54,10 @@ html, body {
 #jugador {
     position: fixed;
 
-    width: 80px;
-    height: 114px;
+    
+    width: 4.17vw;
+    height: 10.56vh;
+
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -79,6 +81,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
