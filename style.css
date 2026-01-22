@@ -43,8 +43,6 @@ html, body {
 
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
-   
-    background-size: auto 100%; /* borrar */
     image-rendering: pixelated;
 
     z-index: 9;
@@ -72,8 +70,8 @@ html, body {
 .meteorito {
     position: fixed;
 
-    width: 6vh;
-    height: 6vw;
+    width: 9vh;
+    height: 9vw;
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -82,6 +80,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
