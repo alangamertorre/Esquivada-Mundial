@@ -38,7 +38,7 @@ html, body {
     left: 0;
 
     height: 100%;
-    width: 100%;
+    width: 10%;
 
 
     background-image: url("Camp-de-juego.png");
@@ -72,8 +72,8 @@ html, body {
 .meteorito {
     position: fixed;
 
-    width: 4.6vh;
-    height: 4.6vw;
+    width: 6vh;
+    height: 6vw;
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -82,6 +82,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
