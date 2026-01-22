@@ -37,7 +37,7 @@ html, body {
     bottom: 0;
     left: 0;
 
-    height: 30%;
+    height: 29%;
     width: 100%;
 
 
@@ -61,7 +61,6 @@ html, body {
 
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
 
     image-rendering: pixelated;
     z-index: 11;
@@ -71,8 +70,8 @@ html, body {
 .meteorito {
     position: fixed;
 
-    width: 8vh;
-    height: 8vw;
+    width: 7vh;
+    height: 7vw;
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -81,6 +80,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
