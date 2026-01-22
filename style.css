@@ -44,6 +44,7 @@ html, body {
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
     image-rendering: pixelated;
+    background-size: contain;
 
     z-index: 9;
     
@@ -80,6 +81,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
