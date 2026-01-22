@@ -36,14 +36,14 @@ html, body {
     bottom: 0;
     left: 0;
 
-    width: 100%;
-    width: 3vw;
+    height: 100%;
+    width: 20vw;
 
 
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
    
-    background-size: auto 3vh; /* borrar */
+    background-size: auto 20vh; /* borrar */
     background-position: bottom;
     image-rendering: pixelated;
 
@@ -82,6 +82,7 @@ html, body {
     image-rendering: pixelated;
     z-index: 10;
 }
+
 
 
 
