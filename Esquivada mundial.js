@@ -126,8 +126,8 @@ function detectarColision(m) {
         a.top < b.bottom - 15 &&
         a.bottom > b.top + 15
     ) {
-        alert("💥 Juego terminado");
         location.reload();
+        window.reload();
     }
 }
 
@@ -141,6 +141,7 @@ setInterval(crearMeteorito, 1200);
 
 
     
+
 
 
 
