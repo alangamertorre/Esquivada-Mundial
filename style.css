@@ -2,12 +2,19 @@
 * {
     margin: 0;
     padding: 0;
+    
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
 }
+
 
 /* DOCUMENTO */
 html, body {
-    width: 100%;
-    height: 100%;
+    width: 100dvw;
+    height: 100dvh;
+    width: 100svw;
+    height: 100svh;
+    
     overflow: hidden;
     font-family: Arial, sans-serif;
     background: transparent;
@@ -19,8 +26,10 @@ html, body {
     top: 0;
     left: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 100svw;
+    width: 100dvw;
+    height: 100dvh;
+    height: 100svh;
 
     background-image: url("cielo.png");
     background-repeat: no-repeat;
@@ -37,9 +46,11 @@ html, body {
     bottom: 0;
     left: 0;
 
-    height: 29%;
-    width: 100%;
-
+    height: 32dvh;
+    height: 32svh;
+    width: 100dvw;
+    width: 100svw;
+    size: 1;
 
     background-image: url("Camp-de-juego.png");
     background-repeat: repeat-x;
@@ -55,8 +66,8 @@ html, body {
     position: fixed;
 
     
-    width: 7vw;
-    height: 12vh;
+    width: 10vh;
+    height: 10vh;
 
 
     background-size: contain;
@@ -70,16 +81,236 @@ html, body {
 .meteorito {
     position: fixed;
 
-    width: 7vh;
-    height: 7vw;
+    width: 3vw;
+    height: 7vh;
 
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
-
     image-rendering: pixelated;
     z-index: 10;
 }
+
+
+/* --- BALAS --- */
+.bala {
+    position: fixed;
+
+    width: 3vw;
+    height: 3vh;
+    
+    transform: rotate(180deg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    z-index: 10;
+}
+/* --- INTERFAZ --- */
+/* --- TIEMPO Y NIVEL --- */
+#tiempo {
+    position: fixed;
+    top: 10px;
+    left: 90%;
+
+    font-size: 24px;
+    color: white;
+
+    background: transparent;
+    padding: 6px 10px;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 9999;
+}
+
+#nivel {
+    position: fixed;
+    top: 10px;
+    left: 80%;
+
+    font-size: 24px;
+    color: white;
+
+    background: transparent;
+    padding: 6px 10px;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 9999;
+}
+
+#debug {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    top: 10px;
+
+    
+    width: auto;
+    height: auto;
+
+    font-size: 20px;
+    color: white;
+
+    padding: 4px 8px;
+    font-family:  system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    z-index: 9999;
+}
+
+/* --- PANTALLAS --- */
+/* --- GAME OVER --- */
+.GameOver {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    width: 100svw;
+    height: 100dvh;
+    height: 100svh;
+
+    background-color: rgba(94, 93, 93, 0.459);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* o 100% 100% */
+    z-index: 10000;
+}
+/* --- TEXTO GAME OVER --- */
+.TxtGO {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 50px;
+    color: white;
+    text-align: center;
+
+    background: transparent;
+    padding: 6px 10px;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 100000;
+}
+.TxtGO2 {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 24px;
+    color: white;
+    text-align: center;
+
+    background: transparent;
+    padding: 6px 10px;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 100000;
+}
+
+.play {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 90px;
+
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    align-items: center;
+
+    padding-top: 50px;
+    background-color: rgb(37, 119, 26);
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 100000;
+}
+
+.exit {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 90px;
+
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    align-items: center;
+
+    padding-top: 50px;
+    background-color: rgb(99, 49, 0);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 100000;
+}
+
+/* --- INICiO --- */
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    width: 100svw;
+    height: 100dvh;
+    height: 100svh;
+
+    background-color: rgb(138, 138, 138);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* o 100% 100% */
+    z-index: 100000;
+}
+.caja {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 300px;
+    
+    border-bottom: 2px solid rgb(126, 126, 126);
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; /* o 100% 100% */
+    align-items: center;
+    z-index: 100001;
+}
+
+
+
+.txtI {
+    position: fixed;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    background: transparent;
+    padding: 6px 44px;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 100002;
+    background-color: transparent;
+    left: 20px;
+}
+
+.playI {
+    position: fixed;
+    width: 300px;
+    height: 90px;
+    font-size: 30px;
+    top: 150px;
+    left: 100px;
+    color: white;
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;
+    background-color: rgb(37, 119, 26);
+    border: 2px solid rgb(0, 0, 0);
+}
+
 
 
 
