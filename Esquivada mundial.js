@@ -432,7 +432,10 @@ const playI = document.querySelector(".playI");
 playI.addEventListener("click", () => {
     inicioScreen.style.display = "none";
     juegoIniciado = true;
-    alert('Consejo: Reinicia el juego despues de hacer pantalla completa para evitar errores visuales.');
+    console.log('Consejo: Reinicia el juego despues de hacer pantalla completa para evitar errores visuales.');
+    const mensaje = document.createElement("div");
+    mensaje.className = "men.";
+    mensaje.innerText = 'Consejo: Reinicia el juego despues de hacer pantalla completa para evitar errores visuales.';
 });
 
 playI.addEventListener("mouseenter", () => {
@@ -453,6 +456,7 @@ playI.addEventListener("mouseleave", () => {
 
 
     
+
 
 
 
